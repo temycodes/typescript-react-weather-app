@@ -22,7 +22,7 @@ export async function getServerSideProps(context) {
 //helper function
 const getCity = (param) => {
   const cityParam = param.trim();
-  //get the city id
+  //get the city id ~ split params with a dash -
   const splitCity = cityParam.split("-");
   //grab the last array element of splitCity
   const id = splitCity[splitCity.length - 1];
