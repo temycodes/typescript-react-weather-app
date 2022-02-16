@@ -64,7 +64,7 @@ const getHourlyWeather = (hourlyData) => {
   const tomorrow = new Date(current);
   tomorrow.setDate(tomorrow.getDate() + 1); //plus a day
   tomorrow.setHours(0, 0, 0, 0);
-
+ 
   //divide by 1000 to get timestamps in seconds
   const currentTimeStamp = Math.floor(current.getTime() / 1000);
   const tomorrowTimeStamp = Math.floor(tomorrow.getTime() / 1000);
