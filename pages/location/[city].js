@@ -2,6 +2,7 @@ import React from 'react';
 import cities from '../../lib/city.list.json'
 
 export async function getServerSideProps(context) {
+  //center call to grab information`city`
   const city = getCity(context.params.city);
   const slug = context.params.city;
   
@@ -18,6 +19,7 @@ export async function getServerSideProps(context) {
   };
 }
 
+//helper function
 const getCity = (param) => {
   const cityParam = param.trim();
   //get the city id
