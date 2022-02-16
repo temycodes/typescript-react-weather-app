@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import React from 'react';
 import cities from '../../lib/city.list.json'
 
@@ -72,17 +73,25 @@ const getHourlyWeather = (hourlyData) => {
   return todayData;
 }
 
+type CityProps = {
+  hourlyWeather: any,
+  currentWeather: any,
+  dailyWeather: any,
+  city: any
+}
+
 export default function City({
   hourlyWeather,
   currentWeather,
   dailyWeather,
   city
-}) {
+}: CityProps) {
   console.log(dailyWeather);
   return (
     <div>
-      <h1>City Page</h1>
-      
+      <Head>
+        <title>{city.name} Weather - Next Weather App</title>
+      </Head>
     </div>
   )
 }
