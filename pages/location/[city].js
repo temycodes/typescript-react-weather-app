@@ -12,12 +12,18 @@ export async function getServerSideProps(context) {
     };
   }
 
+  const res = await fetch(
+    `https://api.openweathermap.org/data/2.5/onecall?lat=${city.coord.lat}&lon=${city.coord.lon}&appid=${process.env.API_KEY}&exclude=minutely&units=metric`
+  );
+
   return {
     props: {
       slug: slug
     },
   };
 }
+
+console.log(process.env.API_KEY);
 
 //helper function
 const getCity = (param) => {
