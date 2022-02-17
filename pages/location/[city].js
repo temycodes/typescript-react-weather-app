@@ -31,6 +31,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       city: city,
+      timezone: date.timezone,
       currentWeather: data.current,
       dailyWeather: data.daily,
       hourlyWeather: getHourlyWeather(data.hourly),
@@ -78,7 +79,8 @@ export default function City({
   hourlyWeather,
   currentWeather,
   dailyWeather,
-  city
+  city,
+  timezone
 }) {
   console.log(dailyWeather);
   return (
@@ -89,7 +91,7 @@ export default function City({
 
       <div className="page-wrapper"> 
         <div className="container">
-          <TodaysWeather city={city} weather={dailyWeather[0]}/>
+          <TodaysWeather city={city} weather={dailyWeather[0]} timezone={timezone}/>
         </div>
       </div>
     </div>
