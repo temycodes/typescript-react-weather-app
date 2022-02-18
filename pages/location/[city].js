@@ -77,7 +77,7 @@ export default function City({
   city,
   timezone
 }) {
-  console.log(hourlyWeather);
+  // console.log(hourlyWeather);
   return (
     <div>
       <Head>
