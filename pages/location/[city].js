@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import React from 'react';
 import cities from '../../lib/city.list.json'
-import TodaysWeather from '../../components/TodaysWeather'
+import TodaysWeather from '../../components/TodaysWeather';
+import moment from 'moment-timezone';
 
 export async function getServerSideProps(context) {
   //center call to grab information`city`
@@ -27,14 +28,15 @@ export async function getServerSideProps(context) {
   }
 
   // console.log(data);
+  const hourlyWeather = getHourlyWeather(data.hourly, data.timezone) //*timezone to function
   
   return {
     props: {
       city: city,
-      timezone: date.timezone,
+      timezone: data.timezone,
       currentWeather: data.current,
       dailyWeather: data.daily,
-      hourlyWeather: getHourlyWeather(data.hourly),
+      hourlyWeather: hourlyWeather
     },
   };
 }
@@ -59,18 +61,11 @@ const getCity = (param) => {
   }
 };
 
-//helper function for hourly data
-const getHourlyWeather = (hourlyData) => {
-  const current = new Date();
-  current.setHours(current.getHours(), 0, 0, 0);
-  const tomorrow = new Date(current);
-  tomorrow.setDate(tomorrow.getDate() + 1); //plus a day
-  tomorrow.setHours(0, 0, 0, 0);
- 
-  //divide by 1000 to get timestamps in seconds
-  const currentTimeStamp = Math.floor(current.getTime() / 1000);
-  const tomorrowTimeStamp = Math.floor(tomorrow.getTime() / 1000);
-  const todayData = hourlyData.filter(data => data.dt < tomorrowTimeStamp);
+//helper function for local timezone machine
+const getHourlyWeather = (hourlyData, timezone) => {
+  const endOfDay = moment().tz(timezone).endOf('day').valueOf(); //valueOf gives a unique timestamp
+  const eodTimeStamp = Math.floor(endOfDay / 1000) //from the milliseconds into seconds
+  const todayData = hourlyData.filter(data => data.dt < eodTimeStamp);
 
   return todayData;
 }
@@ -82,7 +77,7 @@ export default function City({
   city,
   timezone
 }) {
-  console.log(dailyWeather);
+  console.log(hourlyWeather);
   return (
     <div>
       <Head>
