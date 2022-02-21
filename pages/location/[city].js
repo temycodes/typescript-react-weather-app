@@ -5,8 +5,8 @@ import TodaysWeather from '../../components/TodaysWeather';
 import moment from 'moment-timezone';
 import HourlyWeather from '../../components/HourlyWeather'
 
+ //start engine ~ center call to grab information`city`
 export async function getServerSideProps(context) {
-  //center call to grab information`city`
   const city = getCity(context.params.city);
   const slug = context.params.city;
   //check

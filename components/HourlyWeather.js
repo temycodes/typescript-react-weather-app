@@ -1,6 +1,5 @@
-
 import moment from 'moment-timezone';
-    import React from "react";
+import React from "react";
 import Image from "next/image";
     
 
@@ -16,7 +15,7 @@ import Image from "next/image";
                     className={`hourly__time ${
                         index == 0 ? "hourly__time--now" : ""
                     }`}
-                    >
+                    >a
                     </span>
 
                     <Image

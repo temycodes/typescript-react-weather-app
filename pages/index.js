@@ -7,6 +7,7 @@ export default function Home() {
     <div>
       <Head>
         <title>Weather App - Next</title>
+        
       </Head>
 
       <div className="home">

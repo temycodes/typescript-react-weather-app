@@ -5,7 +5,7 @@ import Link from 'next/link';
 export default function Searchbox() {
 
     const [query, setQuery] = React.useState("");
-    const [results, setResults] = React.useState([])
+    const [results, setResults] = React.useState([]) 
 
     const onChange = (e) => {
         const { value } = e.target;
@@ -15,10 +15,12 @@ export default function Searchbox() {
 
         if (value.length > 3) {
             for (let city of cities) {
+                //cities shouldm't be more than 5 results
                 if (matchingCities.length >= 5) {
                     break;
                 }
 
+                //check if it matches the name of the city
                 const match = city.name.toLowerCase().startsWith(value.toLowerCase());
 
                 if (match) {
@@ -42,8 +44,10 @@ export default function Searchbox() {
                 value={query}
                 onChange={onChange}
             />
+
             {query.length > 3 && (
                 <ul>
+                {/* matchingCities accessible to "results"  */}
                 {results.length > 0 ? (
                     results.map((city) => {
                     return (
