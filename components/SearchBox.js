@@ -22,7 +22,8 @@ export default function Searchbox() {
 
                 //check if it matches the name of the city
                 const match = city.name.toLowerCase().startsWith(value.toLowerCase());
-
+                
+                //create unique slug to our results to create unique slug name
                 if (match) {
                     const cityData = {
                         ...city,

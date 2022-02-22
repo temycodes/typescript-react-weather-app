@@ -7,9 +7,10 @@ import HourlyWeather from '../../components/HourlyWeather'
 
  //start engine ~ center call to grab information`city`
 export async function getServerSideProps(context) {
-  const city = getCity(context.params.city);
   const slug = context.params.city;
-  //check
+  const city = getCity(context.params.city);
+  
+  //redirect to a 404 error
   if (!city) {
     return {
       notFound: true,
@@ -53,7 +54,7 @@ const getCity = (param) => {
   if (!id) {
       return null;
   } 
-  //connect json file
+  //connect json file and find city results
   const city = cities.find(city => city.id.toString() == id);
   if (city) {
     return city;
@@ -73,7 +74,7 @@ const getHourlyWeather = (hourlyData, timezone) => {
 
 export default function City({
   hourlyWeather,
-  currentWeather,
+  currentWeather, 
   dailyWeather,
   city,
   timezone
