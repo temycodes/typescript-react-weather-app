@@ -17,6 +17,7 @@ export async function getServerSideProps(context) {
     };
   }
 
+  //make request to API
   const res = await fetch(
     `https://api.openweathermap.org/data/2.5/onecall?lat=${city.coord.lat}&lon=${city.coord.lon}&appid=${process.env.API_KEY}&exclude=minutely&units=metric`
   );

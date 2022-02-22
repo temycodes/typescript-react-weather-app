@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+/**register environment variables */
 require('dotenv').config();
 
 const nextConfig = {
