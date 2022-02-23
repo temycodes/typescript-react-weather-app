@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
-import cities from '../../lib/city.list.json'
+import cities from '../../lib/city.list.json';
 import TodaysWeather from '../../components/TodaysWeather';
 import moment from 'moment-timezone';
 import HourlyWeather from '../../components/HourlyWeather'
@@ -22,14 +22,14 @@ export async function getServerSideProps(context) {
     `https://api.openweathermap.org/data/2.5/onecall?lat=${city.coord.lat}&lon=${city.coord.lon}&appid=${process.env.API_KEY}&units=metric&excludeminutely` 
   );
 
+  //turn res into readable data
   const data = await res.json();
-
   if (!data) {
     return {
       notFound: true, 
     }
   }
-
+  
   // console.log(data);
   const hourlyWeather = getHourlyWeather(data.hourly, data.timezone) //*timezone to function
   
@@ -65,11 +65,11 @@ const getCity = (param) => {
 };
 
 //helper function for local timezone machine
+//get hourly data for the rest of the day
 const getHourlyWeather = (hourlyData, timezone) => {
   const endOfDay = moment().tz(timezone).endOf('day').valueOf(); //valueOf gives a unique timestamp
   const eodTimeStamp = Math.floor(endOfDay / 1000) //from the milliseconds into seconds
   const todayData = hourlyData.filter(data => data.dt < eodTimeStamp);
-
   return todayData;
 }
 
@@ -80,7 +80,7 @@ export default function City({
   city,
   timezone
 }) {
-  // console.log(hourlyWeather);
+  console.log(hourlyWeather);
   return (
     <div>
       <Head>
